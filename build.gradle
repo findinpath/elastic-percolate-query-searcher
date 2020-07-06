@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'com.findinpath'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+
+    // logging
+    testCompile group:'org.slf4j', name:'slf4j-api', version: '1.7.30'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.2'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version:'2.13.2'
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version:'2.13.2'
+
+
+    testCompile group: 'org.elasticsearch', name: 'elasticsearch', version:'7.7.1'
+    testCompile group: 'org.elasticsearch.plugin', name: 'percolator-client', version: '7.7.1'
+    testCompile group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.7.1'
+
+
+    testCompile group: 'org.json', name: 'json', version: '20200518'
+
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version:'5.6.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
+
+    testCompile group: 'org.testcontainers', name: 'junit-jupiter', version:'1.14.3'
+    testCompile group: 'org.testcontainers', name: 'elasticsearch', version: '1.14.3'
+}
