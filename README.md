@@ -37,6 +37,33 @@ be found plentifully examples on how to parse  a JSON string to a `org.elasticse
 instance.
 
 
+## Parsing a JSON query to a `QueryBuilder`
+
+```java
+
+    private static final NamedXContentRegistry XCONTENT_REGISTRY = new NamedXContentRegistry(
+            new SearchModule(
+                    Settings.EMPTY,
+                    false,
+                    Collections.emptyList()
+            ).getNamedXContents()
+    );
+
+    // ....
+
+    private static QueryBuilder parseQuery(String queryAsString) throws IOException {
+        var parser = JsonXContent.jsonXContent.createParser(
+                XCONTENT_REGISTRY,
+                LoggingDeprecationHandler.INSTANCE, queryAsString
+        );
+        return AbstractQueryBuilder.parseInnerQueryBuilder(parser);
+    }
+
+```
+
+
+## Customize a parsed `QueryBuilder` from a JSON query
+
 This project contains the [ElasticPercolateQuerySearcherTest](src/test/java/com/findinpath/elasticsearch/percolator/ElasticPercolateQuerySearcherTest.java) 
 JUnit test class which:
  
@@ -46,5 +73,10 @@ JUnit test class which:
 - executes the query on the news index 
 
 
+## Try out the tests
+
+The tests on the project are based on [testcontainers](https://www.testcontainers.org/) library
+for providing a lightweight, throwaway instance of [Elasticsearch](https://www.testcontainers.org/modules/elasticsearch/).
+ 
 Run the tests on the project by executing:
 `./gradlew test`
